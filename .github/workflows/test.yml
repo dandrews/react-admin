@@ -24,10 +24,14 @@ jobs:
     - uses: bahmutov/npm-install@v1
       with:
         install-command: yarn --immutable
-    - name: Lint
-      run: make lint        
     - name: Build
       run: make build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: ./packages/**/dist
+    - name: Lint
+      run: make lint        
 
   unit-test:
     runs-on: ubuntu-latest
@@ -64,6 +68,7 @@ jobs:
         CI: true
 
   e-commerce:
+    needs: typecheck
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -72,15 +77,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '16.x'
-    - uses: bahmutov/npm-install@v1
+    - uses: actions/download-artifact@v2
       with:
-        install-command: yarn --immutable
-    - name: Build
-      run: make build
+        name: build
+        path: ./packages/**/dist
     - name: Build e-commerce
       run: make build-demo
 
   crm:
+    needs: typecheck
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -92,8 +97,10 @@ jobs:
     - uses: bahmutov/npm-install@v1
       with:
         install-command: yarn --immutable
-    - name: Build
-      run: make build
+    - uses: actions/download-artifact@v2
+      with:
+        name: build
+        path: ./packages/**/dist
     - name: Build crm
       run: make build-crm
 

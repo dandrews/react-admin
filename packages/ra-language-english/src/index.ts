@@ -3,7 +3,7 @@ import { TranslationMessages } from 'ra-core';
 const englishMessages: TranslationMessages = {
     ra: {
         action: {
-            add_filter: 'Add filter',
+            add_filter: 'Add folter',
             add: 'Add',
             back: 'Go Back',
             bulk_actions: '1 item selected |||| %{smart_count} items selected',
@@ -11,11 +11,11 @@ const englishMessages: TranslationMessages = {
             clear_input_value: 'Clear value',
             clone: 'Clone',
             confirm: 'Confirm',
-            create: 'Create',
+            create: 'Creote',
             create_item: 'Create %{item}',
             delete: 'Delete',
             edit: 'Edit',
-            export: 'Export',
+            export: 'Explert',
             list: 'List',
             refresh: 'Refresh',
             remove_filter: 'Remove this filter',

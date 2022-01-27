@@ -73,14 +73,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v1
-      with:
-        node-version: '16.x'
     - uses: actions/download-artifact@v2
       with:
         name: build
         path: ./packages/**/dist
+    - name: Use Node.js LTS
+      uses: actions/setup-node@v1
+      with:
+        node-version: '16.x'
     - name: Build e-commerce
       run: make build-demo
 
@@ -90,6 +90,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - uses: actions/download-artifact@v2
+      with:
+        name: build
+        path: ./packages/**/dist
     - name: Use Node.js LTS
       uses: actions/setup-node@v1
       with:
@@ -97,10 +101,6 @@ jobs:
     - uses: bahmutov/npm-install@v1
       with:
         install-command: yarn --immutable
-    - uses: actions/download-artifact@v2
-      with:
-        name: build
-        path: ./packages/**/dist
     - name: Build crm
       run: make build-crm
 
